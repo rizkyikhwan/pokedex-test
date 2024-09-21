@@ -5,16 +5,23 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/home-page.tsx'
 import ErrorPage from './pages/error-page.tsx'
 import DetailPage from './pages/detail-page.tsx'
+import Layout from './components/layout.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "pokemon/:id",
-    element: <DetailPage />,
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
+      {
+        path: "/pokemon/:pokeName",
+        element: <DetailPage />
+      }
+    ]
   },
 ])
 

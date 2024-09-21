@@ -14,3 +14,22 @@ export async function getColorFromUrl(url: string) {
 
   return color.hex
 }
+
+export const statNameMapping: Record<string, any> = {
+  hp: "HP",
+  attack: "ATK",
+  defense: "DEF",
+  "special-attack": "SATK",
+  "special-defense": "SDEF",
+  speed: "SPD",
+};
+
+export function getEnglishFlavorText(pokemonSpecies: Record<string, any>) {
+  for (let entry of pokemonSpecies.flavor_text_entries) {
+    if (entry.language.name === "en") {
+      let flavor = entry.flavor_text.replace(/\f/g, " ");
+      return flavor;
+    }
+  }
+  return "";
+}

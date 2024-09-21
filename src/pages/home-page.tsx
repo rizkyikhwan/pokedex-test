@@ -1,9 +1,12 @@
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import PokemonLogo from '../assets/images/pokemon-logo.png'
-import PokemonCard from '../components/card/pokemon-card'
+import { GoSearch } from 'react-icons/go';
+import { Link } from 'react-router-dom';
+import PokemonLogo from '../assets/images/pokemon-logo.png';
+import PokemonCard from '../components/card/pokemon-card';
 import SkeletonCard from '../components/card/skeleton-card';
 import usePokemonList from '../hooks/usePokemonList';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { ListPokemon } from '../types/pokemon.type';
 
 export default function HomePage() {
   const {
@@ -14,22 +17,41 @@ export default function HomePage() {
     isLoading
   } = usePokemonList();
 
+  const [filteredPokemon, setFilteredPokemon] = useState<ListPokemon[]>(pokemonList)
+  // const [search, setSearch] = useState("")
+  console.log(pokemonList)
+
+  const onHandleChange = (val: string) => {
+    return setFilteredPokemon(pokemonList.filter(pokemon => pokemon.name.toLowerCase().includes(val)))
+  }
+
   const onChangeList = (action: string) => {
     fetchPokemon(action)
     window.scroll({ top: 0, behavior: "smooth" })
   }
 
   return (
-    <div className="space-y-6 my-10 max-w-5xl w-full mx-auto px-2">
-      <img src={PokemonLogo} alt="pokemon-logo" className="max-w-72 w-full mx-auto" />
+    <div className="space-y-6 my-10">
+      <div className="space-y-5">
+        <img src={PokemonLogo} alt="pokemon-logo" className="max-w-40 md:max-w-72 w-full" />
+        <div className="flex px-4 py-3 rounded-md border-2 border-blue-500 overflow-hidden max-w-md">
+          <input
+            type="text"
+            placeholder="Search Name Pokemon"
+            className="w-full outline-none bg-transparent text-gray-600 text-sm"
+            onChange={e => onHandleChange(e.target.value)}
+          />
+          <GoSearch size={20} className="text-gray-600" />
+        </div>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {isLoading ? (
           [...Array(20)].map((_, index) => (
             <SkeletonCard key={index} />
           ))
         ) : (
-          pokemonList.map((pokemon, index) => (
-            <Link key={index} to={`/pokemon/${pokemon.pokedexNumber}`}>
+          filteredPokemon.map((pokemon, index) => (
+            <Link key={index} to={`/pokemon/${pokemon.name}`}>
               <PokemonCard
                 key={index}
                 name={pokemon.name}

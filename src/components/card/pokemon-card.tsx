@@ -23,7 +23,7 @@ export default function PokemonCard({
 
   useEffect(() => {
     getPokemonColor()
-  }, [name])
+  }, [number])
 
   return (
     <CardLayout bgColor={pokemonColor} className="transition-colors group overflow-hidden">
