@@ -6,6 +6,7 @@ import PokemonCard from '../components/card/pokemon-card';
 import SkeletonCard from '../components/card/skeleton-card';
 import ErrorComp from '../components/error-comp';
 import InputSearch from '../components/input-search';
+import Pokedex from '../components/pokedex';
 import usePokemonList from '../hooks/usePokemonList';
 import { cn } from '../lib/utils';
 
@@ -29,13 +30,16 @@ export default function HomePage() {
 
   return (
     <div className="space-y-6 my-10">
-      <div className="space-y-5">
-        <img src={PokemonLogo} alt="pokemon-logo" className="max-w-40 md:max-w-72 w-full" />
-        <InputSearch
-          value={search}
-          setValue={setSearch}
-          placeholder="Search Name Pokemon"
-        />
+      <div className="flex justify-between">
+        <div className="space-y-5">
+          <img src={PokemonLogo} alt="pokemon-logo" className="max-w-40 md:max-w-72 w-full" />
+          <InputSearch
+            value={search}
+            setValue={setSearch}
+            placeholder="Search Name Pokemon"
+          />
+        </div>
+        <Pokedex />
       </div>
       <div
         className={cn(

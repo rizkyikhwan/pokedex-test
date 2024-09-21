@@ -7,6 +7,7 @@ import ErrorComp from "../components/error-comp"
 import ProgressBar from "../components/progress-bar"
 import usePokemonDetail from "../hooks/usePokemonDetail"
 import { statNameMapping } from "../lib/utils"
+import Pokedex from "../components/pokedex"
 
 export default function DetailPage() {
   const { pokeName } = useParams()
@@ -14,7 +15,7 @@ export default function DetailPage() {
   const { pokemon, pokemonSpecies, isLoading } = usePokemonDetail({ pokeName })
 
   return (
-    <div style={{ backgroundColor: pokemon?.color }} className="p-8 transition-colors">
+    <div style={{ backgroundColor: pokemon?.color }} className="min-h-screen p-8 transition-colors">
       {isLoading ? (
         <div className="flex flex-col items-center justify-center min-h-screen">
           <ImSpinner8 size={48} className="animate-spin text-indigo-600" />

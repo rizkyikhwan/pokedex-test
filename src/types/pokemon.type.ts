@@ -10,6 +10,12 @@ export type ListPokemon = {
   pokedexNumber: number
 }
 
+export type ListPokedex = {
+  name: string;
+  image: string;
+  pokedexNumber: number;
+}
+
 export type PokemonListResponse = {
   count: number;
   next: string | null;
