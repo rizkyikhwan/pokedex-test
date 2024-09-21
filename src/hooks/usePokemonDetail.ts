@@ -17,7 +17,6 @@ const usePokemonDetail = ({ pokeName }: { pokeName: string | undefined }) => {
       const resultSpecies = await axios.get<Record<string, any>>(`${POKEMON_SPECIES_API_BASE_URL}/${name}`)
 
       if (result.data && resultSpecies.data) {
-
         setPokemon({ ...result.data, image: `${POKEMON_IMAGES_BASE_URL}/${result.data.id}.png` })
         setPokemonSpecies(getEnglishFlavorText(resultSpecies.data))
       }

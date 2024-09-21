@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Pokeball from "../../assets/images/pokeball.png";
+import PokeballBG from "../../assets/images/pokeball-bg.png";
 import { getColorFromUrl } from "../../lib/utils";
 import CardLayout from "./card-layout";
 
@@ -26,9 +26,12 @@ export default function PokemonCard({
   }, [number])
 
   return (
-    <CardLayout bgColor={pokemonColor} className="transition-colors group overflow-hidden">
+    <CardLayout
+      bgColor={pokemonColor}
+      className="transition-colors group overflow-hidden"
+    >
       <img
-        src={Pokeball}
+        src={PokeballBG}
         className="absolute -right-10 md:-right-12 top-0 z-10 w-60 opacity-15"
       />
       <div className="relative flex justify-center items-center w-full z-10">
