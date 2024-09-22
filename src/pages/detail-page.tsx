@@ -15,23 +15,34 @@ import { usePokedexStore } from "../store/pokedex-store"
 export default function DetailPage() {
   const navigate = useNavigate()
   const { pokeName } = useParams()
-  const { pokemon, pokemonSpecies, isLoading } = usePokemonDetail({ pokeName })
+  const { pokemon, pokemonSpecies, isLoading, errorMsg } = usePokemonDetail({ pokeName })
   const { pokedexList, addPokemon, removePokemon } = usePokedexStore()
 
-  const isHasPokemon = pokedexList.some(val => val.name === pokemon?.name)
+  // Check pokemon is already on list for conditional function
+  const isHasPokemon = pokedexList.some(val => val.pokedexNumber === pokemon?.id)
 
   const handleChange = (e: MouseEvent) => {
+    // Prevent following Link to Detail Page
     e.preventDefault()
 
     if (isHasPokemon) {
+      // Note: Maybe should can be improve for this code below of value argument
       removePokemon({ name: pokemon?.name || "", image: pokemon?.image || "", pokedexNumber: pokemon?.id || 0 })
     } else {
+      // Note: Maybe should can be improve for this code below of value argument
       addPokemon({ name: pokemon?.name || "", image: pokemon?.image || "", pokedexNumber: pokemon?.id || 0 })
     }
   }
 
   return (
-    <div style={{ backgroundColor: pokemon?.color }} className="min-h-screen p-8 transition-colors">
+    <div
+      style={{ backgroundColor: pokemon?.color }}
+      className={cn(
+        "min-h-screen p-8 transition-colors", {
+        "flex flex-col justify-center items-center max-w-lg mx-auto": errorMsg
+      }
+      )}
+    >
       {isLoading ? (
         <div className="flex flex-col items-center justify-center min-h-screen">
           <ImSpinner8 size={48} className="animate-spin text-indigo-600" />
@@ -123,7 +134,8 @@ export default function DetailPage() {
         </>
       ) : (
         <ErrorComp
-          description="Pokemon not found!"
+          showTitle={errorMsg ? true : false}
+          description={errorMsg ? errorMsg : "Pokemon not found!"}
         />
       )}
     </div>

@@ -25,6 +25,7 @@ export const statNameMapping: Record<string, string> = {
   speed: "SPD",
 };
 
+// Function for get just one flavour text with english language
 export function getEnglishFlavorText(pokemonSpecies: PokemonSpeciesResponse) {
   for (let entry of pokemonSpecies.flavor_text_entries) {
     if (entry.language.name === "en") {

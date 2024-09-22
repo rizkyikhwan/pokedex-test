@@ -10,14 +10,14 @@ interface UsePokedexStore {
 
 export const usePokedexStore = create<UsePokedexStore>()(persist((set) => ({
   pokedexList: [],
-  addPokemon: (pokemon: Pokedex) => {
+  addPokemon: (pokemon) => {
     set(state => ({
       pokedexList: [pokemon, ...state.pokedexList]
     }))
   },
-  removePokemon: (pokemon: Pokedex) => {
+  removePokemon: (pokemon) => {
     set(state => ({
-      pokedexList: state.pokedexList.filter(v => v.name !== pokemon.name)
+      pokedexList: state.pokedexList.filter(v => v.pokedexNumber !== pokemon.pokedexNumber)
     }))
   }
 }), {

@@ -6,6 +6,7 @@ export default function Layout() {
   const pathName = location.pathname?.split('/');
 
   const conditionPath = ['pokemon'];
+  // Condition for layout style with specific pathname
   const includePath = conditionPath.some((el) => pathName?.includes(el));
 
   return (

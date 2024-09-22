@@ -16,7 +16,8 @@ export default function HomePage() {
     hasMorePokemon,
     onFirstPage,
     fetchPokemon,
-    isLoading
+    isLoading,
+    errorMsg
   } = usePokemonList();
 
   const [search, setSearch] = useState("")
@@ -65,8 +66,8 @@ export default function HomePage() {
             ))
           ) : (
             <ErrorComp
-              showTitle={false}
-              description="Pokemon not found!"
+              showTitle={errorMsg ? true : false}
+              description={errorMsg ? errorMsg : "Pokemon not found!"}
             />
           )
         )}

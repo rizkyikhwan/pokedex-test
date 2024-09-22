@@ -18,11 +18,14 @@ export default function PokemonCard({
   number,
 }: PokemonCardProps) {
   const { pokedexList, addPokemon, removePokemon } = usePokedexStore()
-  const isHasPokemon = pokedexList.some(val => val.name === name)
+
+  // Check pokemon is already on list for conditional function
+  const isHasPokemon = pokedexList.some(val => val.pokedexNumber === number)
 
   const [pokemonColor, setPokemonColor] = useState<string | undefined>(undefined);
 
   const handleChange = (e: MouseEvent) => {
+    // Prevent following Link to Detail Page
     e.preventDefault()
 
     if (isHasPokemon) {
@@ -47,7 +50,6 @@ export default function PokemonCard({
       classNameParent="transition-colors group overflow-hidden"
       className="flex flex-col justify-end px-1"
     >
-
       <button
         type="button"
         className={cn("absolute left-2 top-2 text-xs py-1 px-2 flex items-center rounded-full bg-slate-100/40 z-20 disabled:opacity-50", { "bg-rose-200/30": isHasPokemon })}
