@@ -1,4 +1,4 @@
-## How do we run this repository
+## How do run this repository
 
 1. Clone or Download this repository
 2. Open project
