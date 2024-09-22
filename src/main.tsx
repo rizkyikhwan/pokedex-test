@@ -1,11 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import HomePage from './pages/home-page.tsx'
-import ErrorPage from './pages/error-page.tsx'
-import DetailPage from './pages/detail-page.tsx'
 import Layout from './components/layout.tsx'
+import './index.css'
+import DetailPage from './pages/detail-page.tsx'
+import ErrorPage from './pages/error-page.tsx'
+import HomePage from './pages/home-page.tsx'
+import PokedexPage from './pages/pokedex-page.tsx'
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
       {
         path: "/pokemon/:pokeName",
         element: <DetailPage />
-      }
+      },
+      {
+        path: "/pokedex",
+        element: <PokedexPage />
+      },
     ]
   },
 ])

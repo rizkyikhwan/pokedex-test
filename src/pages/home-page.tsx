@@ -36,7 +36,7 @@ export default function HomePage() {
           <InputSearch
             value={search}
             setValue={setSearch}
-            placeholder="Search Name Pokemon"
+            placeholder="Search Pokemon Name"
           />
         </div>
         <Pokedex />
@@ -65,6 +65,7 @@ export default function HomePage() {
             ))
           ) : (
             <ErrorComp
+              showTitle={false}
               description="Pokemon not found!"
             />
           )

@@ -1,22 +1,25 @@
 import { create } from "zustand";
-import { ListPokedex } from "../types/pokemon.type";
+import { persist } from "zustand/middleware";
+import { Pokedex } from "../types/pokemon.type";
 
 interface UsePokedexStore {
-  pokedexList: ListPokedex[]
-  addPokemon: (pokemon: ListPokedex) => void
-  removePokemon: (pokemon: ListPokedex) => void
+  pokedexList: Pokedex[]
+  addPokemon: (pokemon: Pokedex) => void
+  removePokemon: (pokemon: Pokedex) => void
 }
 
-export const usePokedexStore = create<UsePokedexStore>((set) => ({
+export const usePokedexStore = create<UsePokedexStore>()(persist((set) => ({
   pokedexList: [],
-  addPokemon: (pokemon: ListPokedex) => {
+  addPokemon: (pokemon: Pokedex) => {
     set(state => ({
-      pokedexList: [...state.pokedexList, pokemon]
+      pokedexList: [pokemon, ...state.pokedexList]
     }))
   },
-  removePokemon: (pokemon: ListPokedex) => {
+  removePokemon: (pokemon: Pokedex) => {
     set(state => ({
       pokedexList: state.pokedexList.filter(v => v.name !== pokemon.name)
     }))
   }
+}), {
+  name: "pokedex"
 }))

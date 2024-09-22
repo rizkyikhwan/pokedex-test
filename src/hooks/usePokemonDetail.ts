@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { getColorFromUrl, getEnglishFlavorText } from "../lib/utils"
-import { DetailPokemon } from "../types/pokemon.type"
+import { DetailPokemon, PokemonSpeciesResponse } from "../types/pokemon.type"
 import { POKEMON_API_BASE_URL, POKEMON_IMAGES_BASE_URL, POKEMON_SPECIES_API_BASE_URL } from "../lib/constants"
 
 const usePokemonDetail = ({ pokeName }: { pokeName: string | undefined }) => {
@@ -14,7 +14,7 @@ const usePokemonDetail = ({ pokeName }: { pokeName: string | undefined }) => {
 
     if (pokeName) {
       const result = await axios.get<DetailPokemon>(`${POKEMON_API_BASE_URL}/pokemon/${name}`)
-      const resultSpecies = await axios.get<Record<string, any>>(`${POKEMON_SPECIES_API_BASE_URL}/${name}`)
+      const resultSpecies = await axios.get<PokemonSpeciesResponse>(`${POKEMON_SPECIES_API_BASE_URL}/${name}`)
 
       if (result.data && resultSpecies.data) {
         setPokemon({ ...result.data, image: `${POKEMON_IMAGES_BASE_URL}/${result.data.id}.png` })

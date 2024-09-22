@@ -1,4 +1,9 @@
-export default function ProgressBar({ value = 0, hexColor = "#10b981" }) {
+interface ProgressBarProps {
+  value?: number
+  hexColor?: string
+}
+
+export default function ProgressBar({ value = 0, hexColor = "#10b981" }: ProgressBarProps) {
   return (
     <div className="relative w-full">
       <div className="flex h-1.5 overflow-hidden text-sm bg-gray-200 rounded">

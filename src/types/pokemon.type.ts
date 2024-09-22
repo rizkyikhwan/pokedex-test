@@ -10,7 +10,7 @@ export type ListPokemon = {
   pokedexNumber: number
 }
 
-export type ListPokedex = {
+export type Pokedex = {
   name: string;
   image: string;
   pokedexNumber: number;
@@ -57,13 +57,18 @@ export type DetailPokemon = {
   weight: number
   height: number
   abilities: PokemonAbility[]
-  sprites: {
-    other: {
-      "official-artwork": {
-        front_default: string
-      }
-    }
-  }
   stats: PokemonStat[]
   color: string
+}
+
+export type PokemonFlavorTextEntries = {
+  flavor_text: string
+  language: {
+    name: string
+    url: string
+  }
+}
+
+export type PokemonSpeciesResponse = {
+  flavor_text_entries: PokemonFlavorTextEntries[]
 }

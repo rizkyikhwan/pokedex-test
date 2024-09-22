@@ -1,9 +1,10 @@
 import { MouseEvent, useEffect, useState } from "react";
+import { IoAddOutline } from "react-icons/io5";
+import { LuTrash } from "react-icons/lu";
 import PokeballBG from "../../assets/images/pokeball-bg.png";
 import { cn, getColorFromUrl } from "../../lib/utils";
-import CardLayout from "./card-layout";
-import { IoAddOutline, IoRemove } from "react-icons/io5";
 import { usePokedexStore } from "../../store/pokedex-store";
+import CardLayout from "./card-layout";
 
 interface PokemonCardProps {
   name: string
@@ -49,15 +50,15 @@ export default function PokemonCard({
 
       <button
         type="button"
-        className="absolute left-2 top-2 text-xs py-1 px-2 flex items-center rounded-full bg-slate-100/40 z-20 disabled:opacity-50"
+        className={cn("absolute left-2 top-2 text-xs py-1 px-2 flex items-center rounded-full bg-slate-100/40 z-20 disabled:opacity-50", { "bg-rose-200/30": isHasPokemon })}
         onClick={e => handleChange(e)}
       >
         {isHasPokemon ? (
-          <IoRemove size={18} className="text-rose-500" />
+          <LuTrash size={18} className="text-rose-600" />
         ) : (
-          <IoAddOutline size={18} className="text-rose-500" />
+          <IoAddOutline size={18} className="text-rose-600" />
         )}
-        <span className={cn("ml-1 font-semibold", { "text-rose-500": isHasPokemon })}>Pokedex</span>
+        <span className={cn("ml-1 font-semibold", { "text-rose-600": isHasPokemon })}>Pokedex</span>
       </button>
       <img
         src={PokeballBG}
